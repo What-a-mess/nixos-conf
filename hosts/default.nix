@@ -28,37 +28,40 @@ let
         ] ++
         extraModules;
     };
-in {
-    wamess-dekstop = let 
-        pkgs = import inputs.nixpkgs {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
+
+    initPkgs = {
+        system ? "x86_64-linux",
+        allowUnfree ? true
+    }: {
+        nixpkgs = import inputs.nixpkgs {
+            inherit system;
+            config.allowUnfree = allowUnfree;
         };
         extraPkgs = if builtins.hasAttr "extraNixpkgs" self then 
             builtins.mapAttrs (name: extraNixpkg: import extraNixpkg {
-                system = "x86_64-linux";
-                config.allowUnfree = true;
+                inherit system;
+                config.allowUnfree = allowUnfree;
             }) self.extraNixpkgs else {};
+    };
+
+in {
+    wamess-dekstop = let 
+        packages = initPkgs { system = "x86_64-linux"; };
     in mkHost {
         hostname = "wamess-dekstop";
         username = "wamess";
         extraModules = [ ./wamess-desktop ];
-        inherit pkgs extraPkgs;
+        pkgs = packages.pkgs;
+        extraPkgs = packages.extraPkgs;
     };
+
     wamess-test-vm = let 
-        pkgs = import inputs.nixpkgs {
-            system = "x86_64-linux";
-            config.allowUnfree = true;
-        };
-        extraPkgs = if builtins.hasAttr "extraNixpkgs" self then 
-            builtins.mapAttrs (name: extraNixpkg: import extraNixpkg {
-                system = "x86_64-linux";
-                config.allowUnfree = true;
-            }) self.extraNixpkgs else {};
+        packages = initPkgs { system = "x86_64-linux"; };
     in mkHost {
         hostname = "wamess-test-vm";
         username = "wamess";
         extraModules = [ ./wamess-test-vm ];
-        inherit pkgs extraPkgs;
+        pkgs = packages.pkgs;
+        extraPkgs = packages.extraPkgs;
     };
 }

@@ -4,7 +4,7 @@
   home.packages = with pkgs; [
     zip
     unzip
-    #vscode
-    clash-verge
+    vscode
+    # clash-verge
   ];
 }
