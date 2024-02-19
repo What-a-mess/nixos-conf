@@ -17,8 +17,9 @@ let
         modules = (builtins.attrValues self.nixosModules.default) ++ [
             inputs.home-manager.nixosModules.home-manager {
                 home-manager = {
-                    useGlobalPkgs = true;
-                    useUserPackages = true;
+                    # useGlobalPkgs = true;
+                    # useUserPackages = true;
+                    inherit pkgs;
                     extraSpecialArgs = {
                         inherit extraPkgs;
                     };
