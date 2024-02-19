@@ -1,0 +1,47 @@
+{ inputs, self }:
+let 
+    mkHost = {
+        hostname,
+        username,
+        nixpkgs ? inputs.nixpkgs,
+        system ? "x86_64-linux",
+        pkgs ? inputs.nixpkgs.legacyPackages.${system},
+        extraPkgs ? {},
+        extraModules ? []
+    }:
+    nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+            inherit inputs self username extraPkgs;
+        };
+        modules = (builtins.attrValues self.nixosModules) ++ [
+            inputs.home-manager.nixosModules.home-manager {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = {
+                    inherit extraPkgs;
+                };
+                users.${username} = import ../home-manager/hm-module.nix;
+            }
+        ] ++
+        extraModules;
+    };
+in {
+    wamess-dekstop = let {
+        pkgs = import inputs.nixpkgs {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+        };
+        extraPkgs = if builtins.hasAttr self.extraNixpkgs then 
+            builtins.map (extraNixpkg: import extraNixpkg {
+                system = "x86_64-linux";
+                config.allowUnfree = true;
+            }) [self.extraNixpkgs] else {}
+    }
+    in mkHost {
+        hostname = "wamess-dekstop";
+        username = "wamess";
+        extraModules = [ ./wamess-desktop ];
+        inherit pkgs extraPkgs;
+    }
+}
