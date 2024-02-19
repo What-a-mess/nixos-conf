@@ -14,7 +14,7 @@ let
         specialArgs = {
             inherit inputs self username hostname extraPkgs;
         };
-        modules = (builtins.attrValues self.nixosModules) ++ [
+        modules = (builtins.attrValues self.nixosModules.default) ++ [
             inputs.home-manager.nixosModules.home-manager {
                 useGlobalPkgs = true;
                 useUserPackages = true;
