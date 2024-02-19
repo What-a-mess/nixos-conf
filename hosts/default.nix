@@ -12,7 +12,7 @@ let
     nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-            inherit inputs self username, hostname, extraPkgs;
+            inherit inputs self username hostname extraPkgs;
         };
         modules = (builtins.attrValues self.nixosModules) ++ [
             inputs.home-manager.nixosModules.home-manager {
