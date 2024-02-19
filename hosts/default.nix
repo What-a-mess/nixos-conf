@@ -16,12 +16,14 @@ let
         };
         modules = (builtins.attrValues self.nixosModules.default) ++ [
             inputs.home-manager.nixosModules.home-manager {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = {
-                    inherit extraPkgs;
+                home-manager = {
+                    useGlobalPkgs = true;
+                    useUserPackages = true;
+                    extraSpecialArgs = {
+                        inherit extraPkgs;
+                    };
+                    users.${username} = import ../home-manager/hm-module.nix;
                 };
-                users.${username} = import ../home-manager/hm-module.nix;
             }
         ] ++
         extraModules;
