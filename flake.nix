@@ -50,14 +50,14 @@
     # nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { self }@inputs: {
+  outputs = { self, ... }@inputs: {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosModules = import ./nixos;
 
     extraNixpkgs = {
       stable = inputs.nixpkgs-stable;
-    }
+    };
 
     nixosConfigurations = import ./hosts { inherit inputs self; };
   };
