@@ -5,7 +5,7 @@
     wget
     curl
     nix-bash-completions
-  ]
+  ];
 
   programs.neovim = {
     enable = true;

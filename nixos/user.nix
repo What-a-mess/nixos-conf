@@ -4,7 +4,7 @@
   username,
   ...
 }: {
-  users = {}
+  users = {};
   users.users.${username} = {
     isNormalUser = true;
     extraGroups = [ 
@@ -19,5 +19,5 @@
     ++ lib.optionals config.virtualisation.libvirtd.enable [ "libvirtd" ]
     ++ lib.optionals config.virtualisation.virtualbox.host.enable ["vboxusers"]
     ++ lib.optionals config.programs.adb.enable [ "adbusers" ];
-  }
+  };
 }

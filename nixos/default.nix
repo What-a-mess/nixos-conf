@@ -5,5 +5,5 @@
     ./audio.nix
     ./fonts.nix
     ./desktop/kde.nix
-  ]
+  ];
 }
