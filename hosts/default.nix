@@ -46,13 +46,14 @@ let
 
 in {
     wamess-dekstop = let 
-        initPkgs { system = "x86_64-linux" };
+        initPkgs { system = "x86_64-linux"; };
     in mkHost {
         hostname = "wamess-dekstop";
         username = "wamess";
         extraModules = [ ./wamess-desktop ];
         inherit pkgs extraPkgs;
     };
+    
     wamess-test-vm = let 
         initPkgs { system = "x86_64-linux"; };
     in mkHost {
