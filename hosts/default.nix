@@ -19,9 +19,8 @@ let
                 home-manager = {
                     # useGlobalPkgs = true;
                     # useUserPackages = true;
-                    inherit pkgs;
                     extraSpecialArgs = {
-                        inherit extraPkgs;
+                        inherit pkgs extraPkgs;
                     };
                     users.${username} = import ../home-manager/hm-module.nix;
                 };
