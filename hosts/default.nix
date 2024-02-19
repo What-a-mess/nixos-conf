@@ -46,20 +46,22 @@ let
 
 in {
     wamess-dekstop = let 
-        initPkgs { system = "x86_64-linux"; };
+        packages = initPkgs { system = "x86_64-linux"; };
     in mkHost {
         hostname = "wamess-dekstop";
         username = "wamess";
         extraModules = [ ./wamess-desktop ];
-        inherit pkgs extraPkgs;
+        pkgs = packages.pkgs;
+        extraPkgs = packages.extraPkgs;
     };
-    
+
     wamess-test-vm = let 
-        initPkgs { system = "x86_64-linux"; };
+        packages = initPkgs { system = "x86_64-linux"; };
     in mkHost {
         hostname = "wamess-test-vm";
         username = "wamess";
         extraModules = [ ./wamess-test-vm ];
-        inherit pkgs extraPkgs;
+        pkgs = packages.pkgs;
+        extraPkgs = packages.extraPkgs;
     };
 }
