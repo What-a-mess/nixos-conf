@@ -17,9 +17,9 @@ let
         modules = (builtins.attrValues self.nixosModules.default) ++ [
             inputs.home-manager.nixosModules.home-manager {
                 home-manager = {
-                    # useGlobalPkgs = true;
-                    # useUserPackages = true;
-                    inherit pkgs;
+                    useGlobalPkgs = true;
+                    useUserPackages = true;
+                    # inherit pkgs;
                     extraSpecialArgs = {
                         inherit extraPkgs;
                     };
@@ -52,7 +52,7 @@ in {
         hostname = "wamess-dekstop";
         username = "wamess";
         extraModules = [ ./wamess-desktop ];
-        pkgs = packages.pkgs;
+        pkgs = packages.nixpkgs;
         extraPkgs = packages.extraPkgs;
     };
 
@@ -62,7 +62,7 @@ in {
         hostname = "wamess-test-vm";
         username = "wamess";
         extraModules = [ ./wamess-test-vm ];
-        pkgs = packages.pkgs;
+        pkgs = packages.nixpkgs;
         extraPkgs = packages.extraPkgs;
     };
 }
