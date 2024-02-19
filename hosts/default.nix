@@ -44,7 +44,7 @@ in {
         extraModules = [ ./wamess-desktop ];
         inherit pkgs extraPkgs;
     }
-    wamess-test-vm = let {
+    wamess-test-vm = let 
         pkgs = import inputs.nixpkgs {
             system = "x86_64-linux";
             config.allowUnfree = true;
@@ -53,8 +53,7 @@ in {
             builtins.mapAttrs (name: extraNixpkg: import extraNixpkg {
                 system = "x86_64-linux";
                 config.allowUnfree = true;
-            }) [self.extraNixpkgs] else {};
-    }
+            }) self.extraNixpkgs else {};
     in mkHost {
         hostname = "wamess-test-vm";
         username = "wamess";
