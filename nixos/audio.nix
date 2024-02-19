@@ -1,4 +1,4 @@
-{ lib, config }: {
+{ lib, config, ... }: {
   hardware.bluetooth.enable = true;
 
   security.rtkit.enable = config.services.pipewire.enable;
