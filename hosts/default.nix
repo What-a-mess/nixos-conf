@@ -42,7 +42,7 @@ in {
         username = "wamess";
         extraModules = [ ./wamess-desktop ];
         inherit pkgs extraPkgs;
-    }
+    };
     wamess-test-vm = let 
         pkgs = import inputs.nixpkgs {
             system = "x86_64-linux";
@@ -58,5 +58,5 @@ in {
         username = "wamess";
         extraModules = [ ./wamess-test-vm ];
         inherit pkgs extraPkgs;
-    }
+    };
 }
