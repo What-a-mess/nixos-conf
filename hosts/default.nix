@@ -32,11 +32,11 @@ in {
             system = "x86_64-linux";
             config.allowUnfree = true;
         };
-        extraPkgs = if builtins.hasAttr self.extraNixpkgs then 
+        extraPkgs = if builtins.hasAttr "extraNixpkgs" self then 
             builtins.mapAttrs (name: extraNixpkg: import extraNixpkg {
                 system = "x86_64-linux";
                 config.allowUnfree = true;
-            }) [self.extraNixpkgs] else {};
+            }) self.extraNixpkgs else {};
     in mkHost {
         hostname = "wamess-dekstop";
         username = "wamess";
@@ -48,7 +48,7 @@ in {
             system = "x86_64-linux";
             config.allowUnfree = true;
         };
-        extraPkgs = if builtins.hasAttr self.extraNixpkgs then 
+        extraPkgs = if builtins.hasAttr "extraNixpkgs" self then 
             builtins.mapAttrs (name: extraNixpkg: import extraNixpkg {
                 system = "x86_64-linux";
                 config.allowUnfree = true;
