@@ -12,7 +12,7 @@ let
     nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-            inherit inputs self username extraPkgs;
+            inherit inputs self username, hostname, extraPkgs;
         };
         modules = (builtins.attrValues self.nixosModules) ++ [
             inputs.home-manager.nixosModules.home-manager {
@@ -33,7 +33,7 @@ in {
             config.allowUnfree = true;
         };
         extraPkgs = if builtins.hasAttr self.extraNixpkgs then 
-            builtins.map (extraNixpkg: import extraNixpkg {
+            builtins.mapAttrs (name: extraNixpkg: import extraNixpkg {
                 system = "x86_64-linux";
                 config.allowUnfree = true;
             }) [self.extraNixpkgs] else {}
@@ -42,6 +42,23 @@ in {
         hostname = "wamess-dekstop";
         username = "wamess";
         extraModules = [ ./wamess-desktop ];
+        inherit pkgs extraPkgs;
+    }
+    wamess-test-vm = let {
+        pkgs = import inputs.nixpkgs {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+        };
+        extraPkgs = if builtins.hasAttr self.extraNixpkgs then 
+            builtins.mapAttrs (name: extraNixpkg: import extraNixpkg {
+                system = "x86_64-linux";
+                config.allowUnfree = true;
+            }) [self.extraNixpkgs] else {}
+    }
+    in mkHost {
+        hostname = "wamess-test-vm";
+        username = "wamess";
+        extraModules = [ ./wamess-test-vm ];
         inherit pkgs extraPkgs;
     }
 }
