@@ -16,13 +16,13 @@
                 #efiInstallAsRemovable = true; # in case canTouchEfiVariables doesn't work for your system
                 device = "nodev";
             };
-        }
+        };
     };
 
     networking = {
         hostName = "wamess-test-vm";
         networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-    }
+    };
 
     time.timeZone = "Asia/Shanghai";
 
