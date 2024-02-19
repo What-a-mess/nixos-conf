@@ -27,7 +27,7 @@ let
         extraModules;
     };
 in {
-    wamess-dekstop = let {
+    wamess-dekstop = let 
         pkgs = import inputs.nixpkgs {
             system = "x86_64-linux";
             config.allowUnfree = true;
@@ -36,8 +36,7 @@ in {
             builtins.mapAttrs (name: extraNixpkg: import extraNixpkg {
                 system = "x86_64-linux";
                 config.allowUnfree = true;
-            }) [self.extraNixpkgs] else {}
-    }
+            }) [self.extraNixpkgs] else {};
     in mkHost {
         hostname = "wamess-dekstop";
         username = "wamess";
