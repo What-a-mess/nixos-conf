@@ -1,7 +1,7 @@
 { inputs, pkgs, ... }:
 
 {
-  fonts ={
+  fonts = {
     fontDir.enable = true;
     package = with pkgs; [
       noto-fonts
@@ -18,7 +18,7 @@
       proggyfonts
     ];
 
-    defaultFonts = {
+    fontconfig.defaultFonts = {
       emoji = [ "Noto Color Emoji" ];
         monospace = [
           "Noto Sans Mono CJK SC"
