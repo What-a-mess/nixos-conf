@@ -97,7 +97,7 @@
           hostname = "wamess-test-vm";
           extraPkgs = pkgsSet.x86_64-linux.extraPkgs;
         };
-        modules = self.nixosModules ++ [
+        modules = builtins.attrValues self.nixosModules ++ [
             ./home-manager/hm-module.nix
             ./hosts/wamess-test-vm
             ./nixos/desktop/kde.nix
