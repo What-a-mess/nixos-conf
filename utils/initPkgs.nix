@@ -13,7 +13,7 @@ in rec
     inherit system overlays;
     config = {
       allowUnfree = allowUnfree;
-    }
+    };
   };
   extraPkgs = 
     builtins.mapAttrs (
