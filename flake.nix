@@ -69,6 +69,7 @@
       import ./utils/initPkgs.nix {
           inherit system extraNixpkgs;
           nixpkgs = inputs.nixpkgs;
+          nur = inputs.nur;
       });
 
     nixosConfigurations = {
