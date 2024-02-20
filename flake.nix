@@ -59,7 +59,7 @@
   rec {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
-    nixosModules = import ./nixos;
+    nixosModules = import ./nixos };
 
     extraNixpkgs = {
       stable = inputs.nixpkgs-stable;
@@ -80,6 +80,7 @@
           username = "wamess";
           hostname = "wamess-desktop";
           extraPkgs = pkgsSet.x86_64-linux.extraPkgs;
+          lib = nixpkgs.lib;
         };
         modules = self.nixosModules ++ [
             ./home-manager/hm-module.nix
