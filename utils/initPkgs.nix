@@ -4,19 +4,21 @@
   extraNixpkgs ? {},
   nur ? null,
   allowUnfree ? true,
-  overlauys ? []
+  overlays ? []
 }: let
   lib = nixpkgs.lib;
 in rec
  {
   pkgs = import nixpkgs {
-    inherit system;
-    config.allowUnfree = allowUnfree;
+    inherit system overlays;
+    config = {
+      allowUnfree = allowUnfree;
+    };
   };
   extraPkgs = 
     builtins.mapAttrs (
       name: extraNixpkg: import extraNixpkg {
-        inherit system;
+        inherit system overlays;
         config.allowUnfree = allowUnfree;
       }
     ) extraNixpkgs // lib.attrsets.optionalAttrs nur != null {

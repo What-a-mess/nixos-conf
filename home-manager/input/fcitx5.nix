@@ -30,7 +30,7 @@
     fcitx5.addons = with pkgs; [
       # for flypy chinese input method
       (fcitx5-rime.override {
-        rimeDataPkgs = [ config.nur.repos.linyinfeng.rime-ice ];
+        rimeDataPkgs = [ pkgs.rime-ice ];
       })
       # needed enable rime using configtool after installed
       fcitx5-configtool

@@ -12,4 +12,5 @@ let
     # });
   };
 in
-inputs.nixpkgs.lib.composeManyExtensions [ additions modifications ]
+# inputs.nixpkgs.lib.composeManyExtensions [ additions modifications ]
+[ additions ]
