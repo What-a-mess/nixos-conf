@@ -13,4 +13,4 @@ let
   };
 in
 # inputs.nixpkgs.lib.composeManyExtensions [ additions modifications ]
-modifications
+[ modifications ]
