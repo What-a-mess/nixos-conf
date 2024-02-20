@@ -122,6 +122,7 @@
             }
             ./hosts/wamess-test-vm
             ./nixos/desktop/kde.nix
+            nur.nixosModules.nur
           ];
       };
     };
