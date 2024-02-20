@@ -72,7 +72,7 @@
       });
 
     nixosConfigurations = {
-      wamess-dekstop = nixpkgs.lib.nixosSystem {
+      wamess-dekstop = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         pkgs = pkgsSet.x86_64-linux.pkgs;
         specialArgs = {
@@ -92,7 +92,7 @@
             ./nixos/desktop/kde.nix
           ];
       };
-      wamess-test-vm = nixpkgs.lib.nixosSystem {
+      wamess-test-vm = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         pkgs = pkgsSet.x86_64-linux.pkgs;
         specialArgs = {
