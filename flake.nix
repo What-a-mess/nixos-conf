@@ -50,7 +50,7 @@
     # nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { self, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
   let
     forAllSystems = nixpkgs.lib.genAttrs [
       "x86_64-linux"
@@ -76,7 +76,7 @@
         system = "x86_64-linux";
         pkgs = pkgsSet.x86_64-linux.pkgs;
         specialArgs = {
-          inherit inputs self;
+          inherit inputs self home-manager;
           username = "wamess";
           hostname = "wamess-desktop";
           extraPkgs = pkgsSet.x86_64-linux.extraPkgs;
@@ -91,7 +91,7 @@
         system = "x86_64-linux";
         pkgs = pkgsSet.x86_64-linux.pkgs;
         specialArgs = {
-          inherit inputs self;
+          inherit inputs self home-manager;
           username = "wamess";
           hostname = "wamess-test-vm";
           extraPkgs = pkgsSet.x86_64-linux.extraPkgs;
