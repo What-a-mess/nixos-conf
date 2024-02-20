@@ -1,17 +1,17 @@
-{ pkgs, ... }:
-
 {
-  imports = [
-    ./browsers
-    ./commonapps
-    ./shell/kitty
-    # ./desktop/hyprland
-    ./input/fcitx5.nix
-  ];
-
-  home = {
-    username = "wamess";
-    homeDirectory = "/home/wamess";
-    stateVersion = "24.05";
-  };
-}
+  home-manager,
+  username,
+  pkgs,
+  extraPkgs,
+  ...
+}: 
+  home-manager.nixosModules.home-manager {
+    home-manager = {
+      # useGlobalPkgs = true;
+      # useUserPackages = true;
+      extraSpecialArgs = {
+          inherit pkgs extraPkgs;
+      };
+      users.${username} = import ./home.nix;
+    };
+  }

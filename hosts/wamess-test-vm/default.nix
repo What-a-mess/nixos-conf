@@ -1,8 +1,7 @@
-{ inputs, self, config, pkgs, lib, extraPkgs, ... }: {
+{ config, pkgs, lib, hostname, ... }: {
     imports = [
         ./hardware-configuration.nix
         ./virtualization.nix
-        self.nixosModules.kde
     ];
     boot = {
         loader = {
@@ -20,7 +19,7 @@
     };
 
     networking = {
-        hostName = "wamess-test-vm";
+        hostName = hostname;
         networkmanager.enable = true;  # Easiest to use and most distros use this by default.
     };
 

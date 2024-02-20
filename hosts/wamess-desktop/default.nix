@@ -1,8 +1,7 @@
-{ inputs, self, config, pkgs, lib, extraPkgs, ... }: {
+{ config, pkgs, lib, hostname, ... }: {
     imports = [
         ./hardware-configuration.nix
         ../hardware/nvidia.nix
-        self.nixosModules.kde
     ];
     boot = {
         loader = {
@@ -25,7 +24,7 @@
     };
 
     networking = {
-        hostName = "wamess-desktop";
+        hostName = hostname;
         networkmanager.enable = true;  # Easiest to use and most distros use this by default.
     };
 
