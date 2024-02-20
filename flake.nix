@@ -88,7 +88,8 @@
                 # useGlobalPkgs = true;
                 # useUserPackages = true;
                 extraSpecialArgs = {
-                    inherit pkgs extraPkgs;
+                    inherit pkgs;
+                    extraPkgs = specialArgs.extraPkgs;
                 };
                 users.${username} = import ./home-manager/home.nix;
               };
@@ -112,7 +113,8 @@
                 # useGlobalPkgs = true;
                 # useUserPackages = true;
                 extraSpecialArgs = {
-                    inherit pkgs extraPkgs;
+                    inherit pkgs;
+                    extraPkgs = specialArgs.extraPkgs;
                 };
                 users.${username} = import ./home-manager/home.nix;
               };
