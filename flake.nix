@@ -121,6 +121,7 @@
                 users.wamess = import ./home-manager/home.nix;
               };
             }
+            ./nixos/mods/clash-verge.nix
             ./hosts/wamess-test-vm
             ./nixos/desktop/kde.nix
           ];
