@@ -23,5 +23,5 @@ in rec
       nurNoPkgs = import nur {
         nurpkgs = pkgs;
       };
-    }
+    };
 }
