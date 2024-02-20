@@ -82,7 +82,7 @@
           extraPkgs = pkgsSet.x86_64-linux.extraPkgs;
           lib = nixpkgs.lib;
         };
-        modules = builtins.attrValues nixosModules ++ [
+        modules = (builtins.attrValues nixosModules) ++ [
             ./home-manager/hm-module.nix
             ./hosts/wamess-desktop
             ./nixos/desktop/kde.nix
@@ -97,7 +97,7 @@
           hostname = "wamess-test-vm";
           extraPkgs = pkgsSet.x86_64-linux.extraPkgs;
         };
-        modules = builtins.attrValues self.nixosModules ++ [
+        modules = (builtins.attrValues nixosModules) ++ [
             ./home-manager/hm-module.nix
             ./hosts/wamess-test-vm
             ./nixos/desktop/kde.nix
