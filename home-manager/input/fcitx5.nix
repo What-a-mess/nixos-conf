@@ -9,6 +9,7 @@
   pkgs,
   config,
   lib,
+  extraPkgs,
   ...
 }: {
 #   home.file.".config/fcitx5/profile".source = ./profile;
@@ -28,7 +29,9 @@
     enabled = "fcitx5";
     fcitx5.addons = with pkgs; [
       # for flypy chinese input method
-      fcitx5-rime
+      (fcitx5-rime.override {
+        rimeDataPkgs = [ config.nur.repos.linyinfeng.rime-ice ];
+      })
       # needed enable rime using configtool after installed
       fcitx5-configtool
       fcitx5-chinese-addons

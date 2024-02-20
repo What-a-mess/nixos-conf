@@ -50,7 +50,7 @@
     # nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nur, ... }@inputs:
   let
     forAllSystems = nixpkgs.lib.genAttrs [
       "x86_64-linux"
@@ -122,6 +122,7 @@
             }
             ./hosts/wamess-test-vm
             ./nixos/desktop/kde.nix
+            nur.nixosModules.nur
           ];
       };
     };

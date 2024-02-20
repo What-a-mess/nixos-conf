@@ -13,17 +13,15 @@ in rec
     inherit system;
     config.allowUnfree = allowUnfree;
   };
-  extraPkgs = lib.mkMerge [ 
+  extraPkgs = 
     builtins.mapAttrs (
       name: extraNixpkg: import extraNixpkg {
         inherit system;
         config.allowUnfree = allowUnfree;
       }
-    ) extraNixpkgs
-    lib.mkIf (extraNixpkgs != null) {
+    ) extraNixpkgs // lib.attrsets.optionalAttrs nur != null {
       nurNoPkgs = import nur {
         nurpkgs = pkgs;
       };
-    }
-  ];
+    };
 }
