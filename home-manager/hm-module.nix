@@ -4,7 +4,7 @@
   pkgs,
   extraPkgs,
   ...
-}: {
+}: 
   home-manager.nixosModules.home-manager {
     home-manager = {
       # useGlobalPkgs = true;
@@ -15,4 +15,3 @@
       users.${username} = import ./home.nix;
     };
   }
-}
