@@ -61,7 +61,7 @@
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosModules = import ./nixos {};
 
-    overlays = [ import ./overlays { inherit inputs; }; ]
+    overlays = [ import ./overlays { inherit inputs; } ]
 
     extraNixpkgs = {
       stable = inputs.nixpkgs-stable;
