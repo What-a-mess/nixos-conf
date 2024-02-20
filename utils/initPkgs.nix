@@ -20,7 +20,7 @@ in rec
         config.allowUnfree = allowUnfree;
       }
     ) extraNixpkgs)
-    lib.mkIf (nur != null) {
+    {
       nurNoPkgs = import nur {
         nurpkgs = pkgs;
       };
