@@ -1,4 +1,4 @@
-{
+{ ... }: {
   environment = import ./environment.nix;
   user = import ./user.nix;
   audio = import ./audio.nix;
