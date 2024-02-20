@@ -76,17 +76,22 @@
         system = "x86_64-linux";
         pkgs = pkgsSet.x86_64-linux.pkgs;
         specialArgs = {
-          inherit inputs self home-manager;
+          inherit inputs self;
           username = "wamess";
           hostname = "wamess-desktop";
           extraPkgs = pkgsSet.x86_64-linux.extraPkgs;
           lib = nixpkgs.lib;
         };
         modules = (builtins.attrValues nixosModules) ++ [
-            import ./home-manager/hm-module.nix {
-              inherit home-manager pkgs;
-              username = specialArgs.username;
-              extraPkgs = specialArgs.extraPkgs;
+            home-manager.nixosModules.home-manager {
+              home-manager = {
+                # useGlobalPkgs = true;
+                # useUserPackages = true;
+                extraSpecialArgs = {
+                    inherit pkgs extraPkgs;
+                };
+                users.${username} = import ./home-manager/home.nix;
+              };
             }
             ./hosts/wamess-desktop
             ./nixos/desktop/kde.nix
@@ -96,16 +101,21 @@
         system = "x86_64-linux";
         pkgs = pkgsSet.x86_64-linux.pkgs;
         specialArgs = {
-          inherit inputs self home-manager;
+          inherit inputs self;
           username = "wamess";
           hostname = "wamess-test-vm";
           extraPkgs = pkgsSet.x86_64-linux.extraPkgs;
         };
         modules = (builtins.attrValues nixosModules) ++ [
-            import ./home-manager/hm-module.nix {
-              inherit home-manager pkgs;
-              username = specialArgs.username;
-              extraPkgs = specialArgs.extraPkgs;
+            home-manager.nixosModules.home-manager {
+              home-manager = {
+                # useGlobalPkgs = true;
+                # useUserPackages = true;
+                extraSpecialArgs = {
+                    inherit pkgs extraPkgs;
+                };
+                users.${username} = import ./home-manager/home.nix;
+              };
             }
             ./hosts/wamess-test-vm
             ./nixos/desktop/kde.nix
