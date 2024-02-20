@@ -83,7 +83,7 @@
           lib = nixpkgs.lib;
         };
         modules = (builtins.attrValues nixosModules) ++ [
-            ./home-manager/hm-module.nix {
+            import ./home-manager/hm-module.nix {
               inherit home-manager pkgs;
               username = specialArgs.username;
               extraPkgs = specialArgs.extraPkgs;
@@ -102,7 +102,7 @@
           extraPkgs = pkgsSet.x86_64-linux.extraPkgs;
         };
         modules = (builtins.attrValues nixosModules) ++ [
-            ./home-manager/hm-module.nix {
+            import ./home-manager/hm-module.nix {
               inherit home-manager pkgs;
               username = specialArgs.username;
               extraPkgs = specialArgs.extraPkgs;
