@@ -2,7 +2,7 @@
     imports = [
         ./hardware-configuration.nix
         ./virtualization.nix
-    ]
+    ];
     boot = {
         loader = {
             efi = {

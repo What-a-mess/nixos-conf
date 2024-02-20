@@ -1,8 +1,8 @@
-{ config, pkgs, lib, hostExtraModules, hostname, ... }: {
+{ config, pkgs, lib, hostname, ... }: {
     imports = [
         ./hardware-configuration.nix
         ../hardware/nvidia.nix
-    ] ++ hostExtraModules;
+    ];
     boot = {
         loader = {
             efi = {
