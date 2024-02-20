@@ -91,7 +91,7 @@
                     inherit pkgs;
                     extraPkgs = specialArgs.extraPkgs;
                 };
-                users.${username} = import ./home-manager/home.nix;
+                users.wamess = import ./home-manager/home.nix;
               };
             }
             ./hosts/wamess-desktop
@@ -116,7 +116,7 @@
                     inherit pkgs;
                     extraPkgs = specialArgs.extraPkgs;
                 };
-                users.${username} = import ./home-manager/home.nix;
+                users.wamess = import ./home-manager/home.nix;
               };
             }
             ./hosts/wamess-test-vm
