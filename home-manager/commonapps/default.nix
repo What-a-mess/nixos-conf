@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, extraPkgs, ... }:
 
 {
-  home.packages = with pkgs; [
+  home.packages = with extraPkgs.stable; [
     zip
     unzip
     vscode
