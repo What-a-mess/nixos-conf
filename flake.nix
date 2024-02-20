@@ -83,7 +83,11 @@
           lib = nixpkgs.lib;
         };
         modules = (builtins.attrValues nixosModules) ++ [
-            ./home-manager/hm-module.nix
+            ./home-manager/hm-module.nix {
+              inherit home-manager pkgs;
+              username = specialArgs.username;
+              extraPkgs = specialArgs.extraPkgs;
+            }
             ./hosts/wamess-desktop
             ./nixos/desktop/kde.nix
           ];
@@ -98,7 +102,11 @@
           extraPkgs = pkgsSet.x86_64-linux.extraPkgs;
         };
         modules = (builtins.attrValues nixosModules) ++ [
-            ./home-manager/hm-module.nix
+            ./home-manager/hm-module.nix {
+              inherit home-manager pkgs;
+              username = specialArgs.username;
+              extraPkgs = specialArgs.extraPkgs;
+            }
             ./hosts/wamess-test-vm
             ./nixos/desktop/kde.nix
           ];
