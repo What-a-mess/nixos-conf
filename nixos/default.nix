@@ -1,6 +1,6 @@
 { ... }: [
-  ./environment.nix;
-  ./user.nix;
-  ./audio.nix;
-  ./fonts.nix;
+  ./environment.nix,
+  ./user.nix,
+  ./audio.nix,
+  ./fonts.nix
 ]
