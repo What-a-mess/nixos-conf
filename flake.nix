@@ -59,7 +59,7 @@
   rec {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
-    nixosModules = { imports [./nixos] };
+    nixosModules = { imports [./nixos]; };
 
     extraNixpkgs = {
       stable = inputs.nixpkgs-stable;
