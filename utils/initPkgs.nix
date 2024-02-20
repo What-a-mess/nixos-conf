@@ -7,7 +7,7 @@
   overlauys ? []
 }: let
   lib = nixpkgs.lib;
-in
+in rec
  {
   pkgs = import nixpkgs {
     inherit system;
