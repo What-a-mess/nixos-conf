@@ -50,7 +50,13 @@
     # nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { self, ... }@inputs: {
+  outputs = { self, ... }@inputs:
+  let
+    forAllSystems = nixpkgs.lib.genAttrs [
+      "x86_64-linux"
+    ];
+  in
+  rec {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosModules = import ./nixos;
@@ -59,6 +65,43 @@
       stable = inputs.nixpkgs-stable;
     };
 
-    nixosConfigurations = import ./hosts { inherit inputs self; };
+    pkgsSet = forAllSystems (system: 
+      import ./utils/initPkgs.nix {
+          inherit system extraNixpkgs;
+          nixpkgs = inputs.nixpkgs;
+      });
+
+    nixosConfigurations = {
+      wamess-dekstop = {
+        system = "x86_64-linux";
+        pkgs = pkgsSet.x86_64-linux.pkgs;
+        specialArgs = {
+          inherit inputs self;
+          username = "wamess";
+          hostname = "wamess-desktop";
+          extraPkgs = pkgsSet.x86_64-linux.extraPkgs;
+        };
+        modules = self.nixosModules ++ [
+            ./home-manager/hm-module.nix
+            ./hosts/wamess-desktop
+            ./nixos/desktop/kde.nix
+          ];
+      };
+      wamess-dekstop = {
+        system = "x86_64-linux";
+        pkgs = pkgsSet.x86_64-linux.pkgs;
+        specialArgs = {
+          inherit inputs self;
+          username = "wamess";
+          hostname = "wamess-test-vm";
+          extraPkgs = pkgsSet.x86_64-linux.extraPkgs;
+        };
+        modules = self.nixosModules ++ [
+            ./home-manager/hm-module.nix
+            ./hosts/wamess-test-vm
+            ./nixos/desktop/kde.nix
+          ];
+      };
+    };
   };
 }
