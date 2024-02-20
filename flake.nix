@@ -69,7 +69,6 @@
       import ./utils/initPkgs.nix {
           inherit system extraNixpkgs;
           nixpkgs = inputs.nixpkgs;
-          nur = inputs.nur;
       });
 
     nixosConfigurations = {
@@ -122,7 +121,6 @@
             }
             ./hosts/wamess-test-vm
             ./nixos/desktop/kde.nix
-            nur.nixosModules.nur
           ];
       };
     };
