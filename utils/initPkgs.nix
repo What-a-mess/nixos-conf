@@ -23,7 +23,7 @@ in
     lib.mkIf (extraNixpkgs != null) {
       nurNoPkgs = import nur {
         nurpkgs = pkgs;
-      }
+      };
     }
   ];
 }
