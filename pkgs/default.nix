@@ -1,3 +1,3 @@
 { pkgs }: {
-  rime-ice = pkgs.callPackage import ./rime-ice { };
+  rime-ice = pkgs.callPackage ./rime-ice { };
 }
