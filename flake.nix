@@ -97,7 +97,8 @@
               };
             }
             ./hosts/wamess-desktop
-            ./nixos/desktop/kde.nix
+            # ./nixos/desktop/kde.nix
+            ./nixos/desktop/hyprland.nix
           ];
       };
       wamess-test-vm = nixpkgs.lib.nixosSystem rec {
@@ -121,9 +122,10 @@
                 users.wamess = import ./home-manager/home.nix;
               };
             }
-            ./nixos/mods/clash-verge.nix
+            # ./nixos/mods/clash-verge.nix
             ./hosts/wamess-test-vm
-            ./nixos/desktop/kde.nix
+            # ./nixos/desktop/kde.nix
+            ./nixos/desktop/hyprland.nix
           ];
       };
     };

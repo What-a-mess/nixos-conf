@@ -1,13 +1,12 @@
 {config, pkgs, ...}: {
   imports = [
     ../utils/waybar
-    ../utils/wofi
-    ../utils/mako
-    ../utils/wl-clipboard
+    ../utils/wofi.nix
+    ../utils/mako.nix
+    ../utils/wl-clipboard.nix
   ];
   home.packages = with pkgs; [
     hyprpaper
-    mako
   ];
 
   # home.file.".config/hypr/hyprland.conf".source = ./hyprland.conf;
