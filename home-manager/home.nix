@@ -2,11 +2,11 @@
 
 {
   imports = [
+    ./core
     ./browsers
-    ./commonapps
-    ./shell/kitty
-    ./desktop/wm/hyprland
-    ./input/fcitx5.nix
+    ./gui/shell/kitty
+    ./gui/desktop/wm/hyprland
+    ./gui/input/fcitx5.nix
     ./misc
   ];
 
