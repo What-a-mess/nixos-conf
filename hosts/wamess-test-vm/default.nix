@@ -19,12 +19,12 @@
     };
 
     disabledModules = [ "programs/clash-verge.nix" ];
-    programs.clash-verge = {
-        enable = true;
-        tunMode = true;
-        autoStart = true;
-        package = pkgs.clash-verge-rev;
-    };
+    # programs.clash-verge = {
+    #     enable = true;
+    #     tunMode = true;
+    #     autoStart = true;
+    #     package = pkgs.clash-verge-rev;
+    # };
 
     networking = {
         hostName = hostname;
