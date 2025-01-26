@@ -6,8 +6,9 @@
     enable = true;
   };
 
+  services.xserver.enable = true;
+
   services = {
-    enable = true;
 
     # desktopManager.gnome.enable = true;
 
