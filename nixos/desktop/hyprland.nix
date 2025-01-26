@@ -7,23 +7,15 @@
   };
 
   services = {
-    xserver = {
-      enable = true;
+    enable = true;
 
-      # desktopManager.gnome.enable = true;
+    # desktopManager.gnome.enable = true;
 
-      displayManager = {
-        defaultSession = "hyprland";
-        lightdm.enable = false;
-        # gdm = {
-        #   enable = true;
-        #   wayland = true;
-        # };
-        # sddm.enable = true;
-      };
-
+    displayManager = {
+      defaultSession = "hyprland";
     };
   };
+  programs.xwayland.enable = true;
 
   programs.hyprland = {
     enable = true;
