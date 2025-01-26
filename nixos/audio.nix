@@ -1,10 +1,10 @@
 { lib, config, ... }: {
-  hardware.bluetooth.enable = true;
+  hardware.bluetooth.enable = false;
 
   security.rtkit.enable = config.services.pipewire.enable;
 
   # Pipewire
-  hardware.pulseaudio.enable = lib.mkForce false; # false in pipewire
+  hardware.pulseaudio.enable = false; # false in pipewire
 
   services.pipewire = {
     enable = true;
