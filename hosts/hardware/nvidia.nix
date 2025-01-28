@@ -17,9 +17,9 @@
     # Modesetting is needed most of the time
     modesetting.enable = true;
 
-	# Enable power management (do not disable this unless you have a reason to).
-	# Likely to cause problems on laptops and with screen tearing if disabled.
-	powerManagement.enable = true;
+    # Enable power management (do not disable this unless you have a reason to).
+    # Likely to cause problems on laptops and with screen tearing if disabled.
+    powerManagement.enable = true;
 
     # Use the NVidia open source kernel module (which isn't “nouveau”).
     # Support is limited to the Turing and later architectures. Full list of 
