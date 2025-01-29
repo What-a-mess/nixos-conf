@@ -71,7 +71,7 @@ in {
         hostname = "wamess-dekstop";
         username = "wamess";
         extraModules = [ ./wamess-desktop ../nixos/desktop/hyprland.nix ];
-        pkgs = packages.nixpkgs;
+        pkgs = packages.pkgs;
         extraPkgs = packages.extraPkgs;
     };
 
@@ -82,7 +82,7 @@ in {
         hostname = "wamess-test-vm";
         username = "wamess";
         extraModules = [ ./wamess-test-vm ../nixos/desktop/hyprland.nix ];
-        pkgs = packages.nixpkgs;
+        pkgs = packages.pkgs;
         extraPkgs = packages.extraPkgs;
     };
 }
