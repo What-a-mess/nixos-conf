@@ -23,7 +23,7 @@ let
                     extraSpecialArgs = {
                         inherit pkgs extraPkgs username;
                     };
-                    users.${username} = import ../home-manager/hm-module.nix;
+                    users.${username} = import ../home-manager/home.nix;
                 };
             }
         ] ++
