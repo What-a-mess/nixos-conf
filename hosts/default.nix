@@ -1,5 +1,7 @@
 { inputs, self }:
 let 
+    nixosModules = import ../nixos {};
+
     mkHost = {
         hostname,
         username ? "wamess",
@@ -14,8 +16,8 @@ let
         specialArgs = {
             inherit inputs username hostname extraPkgs;
         };
-        # modules = (builtins.attrValues self.nixosModules.default) ++ [
-        modules = [
+        modules = (builtins.attrValues nixosModules) ++ [
+        # modules = [
             inputs.home-manager.nixosModules.home-manager {
                 home-manager = {
                     # useGlobalPkgs = true;
@@ -48,8 +50,6 @@ let
     forAllSystems = inputs.nixpkgs.lib.genAttrs [
       "x86_64-linux"
     ];
-
-    nixosModules = import ../nixos {};
 
     overlays = import ../overlays { inherit inputs; };
 
