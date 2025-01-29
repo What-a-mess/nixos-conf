@@ -4,7 +4,7 @@
   security.rtkit.enable = config.services.pipewire.enable;
 
   # Pipewire
-  services.pulseaudio.enable = false; # false in pipewire
+  # services.pulseaudio.enable = false; # false in pipewire
 
   services.pipewire = {
     enable = true;
