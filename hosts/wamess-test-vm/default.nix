@@ -17,6 +17,10 @@
             };
         };
     };
+    
+    # Enable the OpenSSH daemon.
+    services.openssh.enable = true;
+
 
     # disabledModules = [ "programs/clash-verge.nix" ];
     # programs.clash-verge = {
