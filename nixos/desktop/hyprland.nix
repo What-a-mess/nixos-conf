@@ -27,11 +27,6 @@
     # enableNvidiaPatches = true;
   };
 
-  wayland.windowManager.hyprland = {
-    enable = true;
-    enableNvidiaPatches = true;
-  };
-
   environment.sessionVariables = {
     XDG_CURRENT_DESKTOP = "Hyprland";
     # XDG_SESSION_TYPE = "wayland";
