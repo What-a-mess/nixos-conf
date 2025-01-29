@@ -2,7 +2,7 @@
 let 
     mkHost = {
         hostname,
-        username,
+        username ? "wamess",
         nixpkgs ? inputs.nixpkgs,
         system ? "x86_64-linux",
         pkgs ? inputs.nixpkgs.legacyPackages.${system},
@@ -20,7 +20,7 @@ let
                     # useGlobalPkgs = true;
                     # useUserPackages = true;
                     extraSpecialArgs = {
-                        inherit pkgs extraPkgs;
+                        inherit pkgs extraPkgs username;
                     };
                     users.${username} = import ../home-manager/hm-module.nix;
                 };
@@ -44,7 +44,7 @@ let
             }) self.extraNixpkgs else {};
     };
 
-    forAllSystems = nixpkgs.lib.genAttrs [
+    forAllSystems = inputs.nixpkgs.lib.genAttrs [
       "x86_64-linux"
     ];
 
@@ -69,7 +69,7 @@ in {
     in mkHost {
         hostname = "wamess-dekstop";
         username = "wamess";
-        extraModules = [ ./wamess-desktop ];
+        extraModules = [ ./wamess-desktop ../nixos/desktop/hyprland.nix ];
         pkgs = packages.nixpkgs;
         extraPkgs = packages.extraPkgs;
     };
@@ -80,7 +80,7 @@ in {
     in mkHost {
         hostname = "wamess-test-vm";
         username = "wamess";
-        extraModules = [ ./wamess-test-vm ];
+        extraModules = [ ./wamess-test-vm ../nixos/desktop/hyprland.nix ];
         pkgs = packages.nixpkgs;
         extraPkgs = packages.extraPkgs;
     };
