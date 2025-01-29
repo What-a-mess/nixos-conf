@@ -22,10 +22,8 @@
 
   inputs = {
     # Nixpkgs
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
-    # nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Home manager
     home-manager = {
@@ -51,83 +49,69 @@
   };
 
   outputs = { self, nixpkgs, home-manager, nur, ... }@inputs:
-  let
-    forAllSystems = nixpkgs.lib.genAttrs [
-      "x86_64-linux"
-    ];
-  in
   rec {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
-    nixosModules = import ./nixos {};
 
-    overlays = import ./overlays { inherit inputs; };
+    # nixosConfigurations = {
+    #   wamess-dekstop = nixpkgs.lib.nixosSystem rec {
+    #     system = "x86_64-linux";
+    #     pkgs = pkgsSet.x86_64-linux.pkgs;
+    #     specialArgs = {
+    #       inherit inputs self;
+    #       username = "wamess";
+    #       hostname = "wamess-desktop";
+    #       extraPkgs = pkgsSet.x86_64-linux.extraPkgs;
+    #       lib = nixpkgs.lib;
+    #     };
+    #     modules = (builtins.attrValues nixosModules) ++ [
+    #         home-manager.nixosModules.home-manager {
+    #           home-manager = {
+    #             # useGlobalPkgs = true;
+    #             # useUserPackages = true;
+    #             extraSpecialArgs = {
+    #                 inherit pkgs;
+    #                 extraPkgs = specialArgs.extraPkgs;
+    #             };
+    #             users.wamess = import ./home-manager/home.nix;
+    #           };
+    #         }
+    #         ./hosts/wamess-desktop
+    #         # ./nixos/desktop/kde.nix
+    #         ./nixos/desktop/hyprland.nix
+    #       ];
+    #   };
+    #   wamess-test-vm = nixpkgs.lib.nixosSystem rec {
+    #     system = "x86_64-linux";
+    #     pkgs = pkgsSet.x86_64-linux.pkgs;
+    #     specialArgs = {
+    #       inherit inputs self;
+    #       username = "wamess";
+    #       hostname = "wamess-test-vm";
+    #       extraPkgs = pkgsSet.x86_64-linux.extraPkgs;
+    #     };
+    #     modules = (builtins.attrValues nixosModules) ++ [
+    #         home-manager.nixosModules.home-manager {
+    #           home-manager = {
+    #             # useGlobalPkgs = true;
+    #             # useUserPackages = true;
+    #             extraSpecialArgs = {
+    #                 inherit pkgs;
+    #                 extraPkgs = specialArgs.extraPkgs;
+    #             };
+    #             users.wamess = import ./home-manager/home.nix;
+    #           };
+    #         }
+    #         # ./nixos/mods/clash-verge.nix
+    #         ./hosts/wamess-test-vm
+    #         # ./nixos/desktop/kde.nix
+    #         ./nixos/desktop/hyprland.nix
+    #       ];
+    #   };
+    # };
 
-    extraNixpkgs = {
-      stable = inputs.nixpkgs-stable;
-    };
-
-    pkgsSet = forAllSystems (system: 
-      import ./utils/initPkgs.nix {
-          inherit system extraNixpkgs overlays;
-          nixpkgs = inputs.nixpkgs;
-      });
-
-    nixosConfigurations = {
-      wamess-dekstop = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        pkgs = pkgsSet.x86_64-linux.pkgs;
-        specialArgs = {
-          inherit inputs self;
-          username = "wamess";
-          hostname = "wamess-desktop";
-          extraPkgs = pkgsSet.x86_64-linux.extraPkgs;
-          lib = nixpkgs.lib;
-        };
-        modules = (builtins.attrValues nixosModules) ++ [
-            home-manager.nixosModules.home-manager {
-              home-manager = {
-                # useGlobalPkgs = true;
-                # useUserPackages = true;
-                extraSpecialArgs = {
-                    inherit pkgs;
-                    extraPkgs = specialArgs.extraPkgs;
-                };
-                users.wamess = import ./home-manager/home.nix;
-              };
-            }
-            ./hosts/wamess-desktop
-            # ./nixos/desktop/kde.nix
-            ./nixos/desktop/hyprland.nix
-          ];
-      };
-      wamess-test-vm = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        pkgs = pkgsSet.x86_64-linux.pkgs;
-        specialArgs = {
-          inherit inputs self;
-          username = "wamess";
-          hostname = "wamess-test-vm";
-          extraPkgs = pkgsSet.x86_64-linux.extraPkgs;
-        };
-        modules = (builtins.attrValues nixosModules) ++ [
-            home-manager.nixosModules.home-manager {
-              home-manager = {
-                # useGlobalPkgs = true;
-                # useUserPackages = true;
-                extraSpecialArgs = {
-                    inherit pkgs;
-                    extraPkgs = specialArgs.extraPkgs;
-                };
-                users.wamess = import ./home-manager/home.nix;
-              };
-            }
-            # ./nixos/mods/clash-verge.nix
-            ./hosts/wamess-test-vm
-            # ./nixos/desktop/kde.nix
-            ./nixos/desktop/hyprland.nix
-          ];
-      };
+    nixosConfigurations = import ./hosts {
+      inherit inputs self;
     };
   };
 }

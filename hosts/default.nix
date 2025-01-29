@@ -44,9 +44,28 @@ let
             }) self.extraNixpkgs else {};
     };
 
+    forAllSystems = nixpkgs.lib.genAttrs [
+      "x86_64-linux"
+    ];
+
+    nixosModules = import ../nixos {};
+
+    overlays = import ../overlays { inherit inputs; };
+
+    extraNixpkgs = {
+      unstable = inputs.nixpkgs-unstable;
+    };
+
+    pkgsSet = forAllSystems (system: 
+      import ../utils/initPkgs.nix {
+          inherit system extraNixpkgs overlays;
+          nixpkgs = inputs.nixpkgs;
+      });
+
 in {
     wamess-dekstop = let 
-        packages = initPkgs { system = "x86_64-linux"; };
+        system = "x86_64-linux";
+        packages = pkgsSet.${system};
     in mkHost {
         hostname = "wamess-dekstop";
         username = "wamess";
@@ -56,7 +75,8 @@ in {
     };
 
     wamess-test-vm = let 
-        packages = initPkgs { system = "x86_64-linux"; };
+        system = "x86_64-linux";
+        packages = pkgsSet.${system};
     in mkHost {
         hostname = "wamess-test-vm";
         username = "wamess";
