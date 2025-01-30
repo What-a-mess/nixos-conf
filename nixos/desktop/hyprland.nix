@@ -5,8 +5,8 @@
     ./greetd.nix
   ];
 
-  let hyprland-pkgs = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-  hardware.graphics = {
+  let hyprland-pkgs = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}
+  in hardware.graphics = {
     package = hyprland-pkgs.mesa.drivers;
     driSupport32Bit = true;
     package32 = hyprland-pkgs.pkgsi686Linux.mesa.drivers;
