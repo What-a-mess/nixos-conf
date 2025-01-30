@@ -1,5 +1,5 @@
-{ inputs, pkgs, ... }:
-let hyprland-pkgs = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}
+{ inputs, pkgs, ... }: let
+  hyprland-pkgs = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in {
   imports = [
     ./greetd.nix
