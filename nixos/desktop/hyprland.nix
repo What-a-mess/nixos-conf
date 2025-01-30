@@ -1,6 +1,9 @@
 { inputs, pkgs, ... }:
 
 {
+  imports = [
+    ./greetd.nix
+  ];
 
   xdg.portal = {
     enable = true;
