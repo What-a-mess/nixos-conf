@@ -1,12 +1,11 @@
 { inputs, pkgs, ... }:
-
-{
+let hyprland-pkgs = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}
+in {
   imports = [
     ./greetd.nix
   ];
 
-  let hyprland-pkgs = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}
-  in hardware.graphics = {
+  hardware.graphics = {
     package = hyprland-pkgs.mesa.drivers;
     driSupport32Bit = true;
     package32 = hyprland-pkgs.pkgsi686Linux.mesa.drivers;
