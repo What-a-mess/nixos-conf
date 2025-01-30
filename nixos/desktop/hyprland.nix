@@ -7,7 +7,7 @@ in {
 
   hardware.graphics = {
     package = hyprland-pkgs.mesa.drivers;
-    driSupport32Bit = true;
+    # driSupport32Bit = true;
     package32 = hyprland-pkgs.pkgsi686Linux.mesa.drivers;
   };
 
