@@ -1,5 +1,5 @@
 { lib, config, ... }: {
-  environment.systemPackages = [
+  environment.systemPackages = with pkgs; [
     pkgs.pciutils
   ];
 }
