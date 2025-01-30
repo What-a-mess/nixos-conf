@@ -12,7 +12,7 @@ in rec
   pkgs = import nixpkgs {
     inherit system overlays;
     config = {
-      allowUnfree = allowUnfree;
+      allowUnfree = true;
     };
   };
   extraPkgs = 

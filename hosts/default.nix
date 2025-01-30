@@ -14,7 +14,7 @@ let
     nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-            inherit inputs username hostname extraPkgs;
+            inherit inputs pkgs username hostname extraPkgs;
         };
         modules = (builtins.attrValues nixosModules) ++ [
         # modules = [
@@ -64,7 +64,7 @@ let
       });
 
 in {
-    wamess-dekstop = let 
+    wamess-desktop = let 
         system = "x86_64-linux";
         packages = pkgsSet.${system};
     in mkHost {
