@@ -69,7 +69,7 @@ in {
     in mkHost {
         hostname = "wamess-dekstop";
         username = "wamess";
-        extraModules = [ ./wamess-desktop ../nixos/desktop/hyprland.nix ];
+        extraModules = [ ./wamess-desktop ../nixos/desktop/hyprland.nix ../nixos/desktop/utils.nix ];
         pkgs = packages.pkgs;
         extraPkgs = packages.extraPkgs;
     };

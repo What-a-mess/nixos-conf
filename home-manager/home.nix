@@ -7,6 +7,8 @@
     ./gui/shell/kitty
     ./gui/desktop/wm/hyprland
     ./gui/input/fcitx5.nix
+    ./gui/dev/vscode.nix
+    ./gui/misc
     # ./misc
     ./tui
   ];
