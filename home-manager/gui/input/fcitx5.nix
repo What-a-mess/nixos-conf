@@ -10,6 +10,7 @@
   config,
   lib,
   extraPkgs,
+  nur,
   ...
 }: {
 #   home.file.".config/fcitx5/profile".source = ./profile;
@@ -21,17 +22,21 @@
   # every time fcitx5 switch input method, it will modify ~/.config/fcitx5/profile file,
   # which will override my config managed by home-manager
   # so we need to remove it before everytime we rebuild the config
-  home.activation.removeExistingFcitx5Profile = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
-    rm -f "${config.xdg.configHome}/fcitx5/profile"
-  '';
+  # home.activation.removeExistingFcitx5Profile = lib.hm.dag.entryBefore ["checkLinkTargets"] ''
+  #   rm -f "${config.xdg.configHome}/fcitx5/profile"
+  # '';
 
   i18n.inputMethod = {
     enabled = "fcitx5";
     fcitx5.addons = with pkgs; [
       # for flypy chinese input method
       (fcitx5-rime.override {
-        rimeDataPkgs = [ pkgs.rime-ice ];
+        # rimeDataPkgs = [ pkgs.rime-ice ];
+        # rimeDataPkgs = [ nur.packages.${pkgs.system}.rime-ice ];
+        rimeDataPkgs = [ nur.legacyPackages.${pkgs.system}.repos.definfo.rime-ice ];
       })
+      librime-lua
+      rime-data
       # needed enable rime using configtool after installed
       fcitx5-configtool
       fcitx5-chinese-addons

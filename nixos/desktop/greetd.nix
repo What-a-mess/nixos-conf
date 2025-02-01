@@ -1,5 +1,7 @@
-{ inputs, pkgs, username, ... }: 
+{ pkgs, username, ... }: 
 {
+  # security.pam.services.greetd.kwallet.enable = true;
+  security.pam.services.greetd.enableGnomeKeyring = true;
   services.greetd = {
     enable = true;
     settings = {

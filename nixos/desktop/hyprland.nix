@@ -1,5 +1,5 @@
-{ inputs, pkgs, ... }: let
-  hyprland-pkgs = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+{ pkgs, hyprland, ... }: let
+  hyprland-pkgs = hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in {
   imports = [
     ./greetd.nix
@@ -16,6 +16,7 @@ in {
   };
 
   services.xserver.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
   services = {
 
@@ -28,7 +29,7 @@ in {
 
   programs.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    package = hyprland.packages.${pkgs.system}.hyprland;
 
     xwayland.enable = true;
 
