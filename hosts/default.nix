@@ -13,16 +13,15 @@ let
     }:
     nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {
-            inherit inputs pkgs username hostname extraPkgs;
+        specialArgs = inputs // {
+            inherit pkgs username hostname extraPkgs;
         };
         modules = (builtins.attrValues nixosModules) ++ [
-        # modules = [
             inputs.home-manager.nixosModules.home-manager {
                 home-manager = {
                     # useGlobalPkgs = true;
                     # useUserPackages = true;
-                    extraSpecialArgs = {
+                    extraSpecialArgs = inputs // {
                         inherit pkgs extraPkgs username;
                     };
                     users.${username} = import ../home-manager/home.nix;
@@ -70,7 +69,7 @@ in {
     in mkHost {
         hostname = "wamess-dekstop";
         username = "wamess";
-        extraModules = [ ./wamess-desktop ../nixos/desktop/hyprland.nix ];
+        extraModules = [ ./wamess-desktop ../nixos/desktop/hyprland.nix ../nixos/desktop/utils.nix ];
         pkgs = packages.pkgs;
         extraPkgs = packages.extraPkgs;
     };

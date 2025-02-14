@@ -1,12 +1,22 @@
-{ inputs, pkgs, ... }:
+{ pkgs, hyprland, ... }: let
+  hyprland-pkgs = hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+in {
+  imports = [
+    ./greetd.nix
+  ];
 
-{
+  hardware.graphics = {
+    package = hyprland-pkgs.mesa.drivers;
+    # driSupport32Bit = true;
+    package32 = hyprland-pkgs.pkgsi686Linux.mesa.drivers;
+  };
 
   xdg.portal = {
     enable = true;
   };
 
   services.xserver.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
   services = {
 
@@ -19,7 +29,7 @@
 
   programs.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    package = hyprland.packages.${pkgs.system}.hyprland;
 
     xwayland.enable = true;
 

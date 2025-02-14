@@ -17,9 +17,9 @@
             };
         };
 
-        kernelParams = [ "nvidia-drm.modeset=1" ];
-        initrd.availableKernelModules = [ "nvidia" ];
-        kernelModules = [ "nvidia" ];
+        # kernelParams = [ "nvidia-drm.modeset=1" ];
+        # initrd.availableKernelModules = [ "nvidia" ];
+        # kernelModules = [ "nvidia" ];
 
     };
 
